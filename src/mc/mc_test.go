@@ -154,7 +154,7 @@ func TestSet(t *testing.T) {
 	// Setting an existing value with bad CAS... should fail
 	_, err = cn.Set(Key2, Val2, 0, 0, cas2+1)
 	assert.Equalf(t, ErrKeyExists, err, "wrong error: %v", err)
-	v, _, cas1, err = cn.Get(Key2)
+	v, _, cas1, _ = cn.Get(Key2)
 	assert.Equalf(t, Val1, v, "value shouldn't have changed: %s", v)
 	assert.Equalf(t, cas1, cas2, "CAS shouldn't have changed: %d, %d", cas1, cas2)
 }
@@ -203,17 +203,17 @@ func TestDelete(t *testing.T) {
 	err = cn.DelCAS(Key1, cas1)
 	assert.Equalf(t, mcNil, err,
 		"unexpected error for deleting key with correct CAS: %v", err)
-	v, _, cas1, err = cn.Get(Key1)
+	_, _, _, err = cn.Get(Key1)
 	assert.Equalf(t, ErrNotFound, err,
 		"delete with wrong CAS seems to have succeeded: %v", err)
 
 	// delete existing key with 0 CAS...
-	cas1, err = cn.Set(Key1, Val1, 0, 0, 0)
+	_, err = cn.Set(Key1, Val1, 0, 0, 0)
 	assert.Equalf(t, mcNil, err, "unexpected error: %v", err)
 	err = cn.DelCAS(Key1, 0)
 	assert.Equalf(t, mcNil, err,
 		"unexpected error for deleting key with 0 CAS: %v", err)
-	v, _, cas1, err = cn.Get(Key1)
+	_, _, _, err = cn.Get(Key1)
 	assert.Equalf(t, ErrNotFound, err,
 		"delete with wrong CAS seems to have succeeded: %v", err)
 }

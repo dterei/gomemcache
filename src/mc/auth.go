@@ -23,7 +23,7 @@ func (cn *Conn) Auth(user, pass string) error {
 }
 
 // authList runs the SASL authentication list command with the server to
-// retrieve the list of support authentication mechansims.
+// retrieve the list of support authentication mechanisms.
 func (cn *Conn) authList() (string, error) {
 	m := &msg{
 		header: header{

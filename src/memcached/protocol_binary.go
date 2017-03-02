@@ -86,7 +86,7 @@ type RequestType uint8
 
 const (
 	// MSG_REQUEST is the magic code for memcache request type.
-	MSG_REQUEST  = RequestType(0x80)
+	MSG_REQUEST = RequestType(0x80)
 
 	// MSG_RESPONSE is the magic code for memcache response type.
 	MSG_RESPONSE = RequestType(0x81)

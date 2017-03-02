@@ -352,7 +352,7 @@ func (cn *Conn) StatsWithKey(key string) (stats map[string]string, err error) {
 	m := &msg{
 		header: header{
 			Op: opStat,
-	 	},
+		},
 		key: key,
 	}
 
@@ -374,8 +374,6 @@ func (cn *Conn) StatsWithKey(key string) (stats map[string]string, err error) {
 		}
 		stats[m.key] = m.val
 	}
-
-	return
 }
 
 // Stats returns some statistics about the memcached server.
